@@ -22,7 +22,7 @@ struct InspectorSidebar: View {
     @State
     private var selection: Int = 0
 
-    var prefs: AppPreferencesModel
+    let prefs: AppPreferencesModel
 
     var body: some View {
         VStack {
@@ -49,7 +49,7 @@ struct InspectorSidebar: View {
         }
         .frame(
             minWidth: 250,
-            idealWidth: 260,
+            idealWidth: prefs.preferences.general.inspectorSidebarWidth,
             minHeight: 0,
             maxHeight: .infinity,
             alignment: .top

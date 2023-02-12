@@ -19,8 +19,8 @@ final class AuroraEditorWindowController: NSWindowController, ObservableObject {
 
     var cancelables: Set<AnyCancellable> = .init()
 
-    var splitViewController: NSSplitViewController! {
-        get { contentViewController as? NSSplitViewController }
+    var splitViewController: AuroraSplitViewController! {
+        get { contentViewController as? AuroraSplitViewController }
         set { contentViewController = newValue }
     }
 
@@ -40,7 +40,7 @@ final class AuroraEditorWindowController: NSWindowController, ObservableObject {
     }
 
     private func setupSplitView(with workspace: WorkspaceDocument) {
-        let splitVC = NSSplitViewController()
+        let splitVC = AuroraSplitViewController(prefs: prefs)
 
         let navigatorView = NavigatorSidebar().environmentObject(workspace)
         let navigator = NSSplitViewItem(
