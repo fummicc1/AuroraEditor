@@ -57,7 +57,12 @@ public extension AppPreferences {
         /// The reveal file in navigator when focus changes behavior of the app.
         public var revealFileOnFocusChange: Bool = false
 
+        /// The fag whether inspector side-bar is open by default.
+        /// Size of inspector side-bar is stored as ``Self.inspectorSidebarWidth``.
         public var keepInspectorSidebarOpen: Bool = true
+
+        // TODO: [fummicc1] implement persistence and presentation logic
+        public var inspectorSidebarWidth: Double = 120
 
         /// Default initializer
         public init() {}
@@ -129,6 +134,10 @@ public extension AppPreferences {
                 Bool.self,
                 forKey: .keepInspectorSidebarOpen
             ) ?? true
+            self.inspectorSidebarWidth = try container.decodeIfPresent(
+                Double.self,
+                forKey: .inspectorSidebarWidth
+            ) ?? 120
         }
         // swiftlint:enable function_body_length
     }

@@ -23,4 +23,11 @@ internal extension View {
             NSCursor.pop()
         }
     }
+
+    func `if`(_ condition: @autoclosure () -> Bool, whenTrue: (Self) -> any View) -> AnyView {
+        if condition() {
+            return AnyView(whenTrue(self))
+        }
+        return AnyView(self)
+    }
 }
