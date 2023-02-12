@@ -24,6 +24,20 @@ internal extension View {
         }
     }
 
+    /// Change View according to `condition` parameter.
+    ///
+    /// We can use this like the below.
+    ///
+    ///     @State private var message = "Example"
+    ///     Text(message)
+    ///         .foregroundColor(Color.blue)
+    ///         .if(message.isEmpty) {
+    ///             $0.foregroundColor(Color.red)
+    ///         }
+    ///
+    /// - Parameters:
+    ///     - `condition`: the flag if we modify self with `whenTrue` closure.
+    ///     - `whenTrue`: return new View for `true`
     func `if`(_ condition: @autoclosure () -> Bool, whenTrue: (Self) -> any View) -> AnyView {
         if condition() {
             return AnyView(whenTrue(self))
