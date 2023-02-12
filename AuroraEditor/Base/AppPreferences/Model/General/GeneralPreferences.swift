@@ -58,7 +58,7 @@ public extension AppPreferences {
         public var revealFileOnFocusChange: Bool = false
 
         /// The fag whether inspector side-bar should open by default or not.
-        /// Size of inspector side-bar is stored as ``Self.inspectorSidebarWidth``.
+        /// Size of inspector side-bar is stored as ``AppPreferences/GeneralPreferences/inspectorSidebarWidth``.
         public var keepInspectorSidebarOpen: Bool = true
 
         // TODO: [fummicc1] implement persistence and presentation logic

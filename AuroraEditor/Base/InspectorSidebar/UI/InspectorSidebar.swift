@@ -22,6 +22,14 @@ struct InspectorSidebar: View {
     @State
     private var selection: Int = 0
 
+    @State
+    private var idealWidth: Double = 250
+
+    /// `fixingViewSize` is necessary to forcely fix the initial size of ``InspectorSidebar``.
+    /// `fixingViewSize` becomes `false` after `View/onApepar` is called.
+    @State
+    private var fixingViewSize: Bool = true
+
     let prefs: AppPreferencesModel
 
     var body: some View {
@@ -49,17 +57,25 @@ struct InspectorSidebar: View {
         }
         .frame(
             minWidth: 250,
-            idealWidth: prefs.preferences.general.inspectorSidebarWidth,
+            idealWidth: idealWidth,
             minHeight: 0,
             maxHeight: .infinity,
             alignment: .top
         )
-        .if(!prefs.preferences.general.keepInspectorSidebarOpen, whenTrue: {
-            $0.hidden()
-        })
+        .fixedSize(horizontal: fixingViewSize, vertical: false)
+        .isHidden(!prefs.preferences.general.keepInspectorSidebarOpen)
         .safeAreaInset(edge: .top) {
             InspectorSidebarToolbarTop(selection: $selection)
                 .padding(.bottom, -8)
+        }
+        .onReceive(prefs.$preferences.map(\.general.inspectorSidebarWidth), perform: { sidebarWidth in
+            idealWidth = sidebarWidth
+        })
+        .onAppear {
+            // waiting current que is necessary to assert that View rendering is correctly finished.
+            DispatchQueue.main.async {
+                fixingViewSize = false
+            }
         }
         .background(
             EffectView(.windowBackground, blendingMode: .withinWindow)

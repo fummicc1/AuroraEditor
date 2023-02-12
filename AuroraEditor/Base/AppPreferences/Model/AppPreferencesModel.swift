@@ -53,6 +53,7 @@ public final class AppPreferencesModel: ObservableObject {
         else {
             return .init()
         }
+        Log.debug("loaded prefs.preferences.general.inspectorSidebarWidth:", prefs.general.inspectorSidebarWidth)
         return prefs
     }
 
