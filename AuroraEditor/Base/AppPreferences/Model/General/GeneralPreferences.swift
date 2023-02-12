@@ -62,7 +62,7 @@ public extension AppPreferences {
         public var keepInspectorSidebarOpen: Bool = true
 
         // TODO: [fummicc1] implement persistence and presentation logic
-        public var inspectorSidebarWidth: Double = 120
+        public var inspectorSidebarWidth: Double = 250
 
         /// Default initializer
         public init() {}
@@ -137,7 +137,7 @@ public extension AppPreferences {
             self.inspectorSidebarWidth = try container.decodeIfPresent(
                 Double.self,
                 forKey: .inspectorSidebarWidth
-            ) ?? 120
+            ) ?? 250
         }
         // swiftlint:enable function_body_length
     }
