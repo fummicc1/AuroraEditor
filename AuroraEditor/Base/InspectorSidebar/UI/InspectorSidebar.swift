@@ -22,8 +22,7 @@ struct InspectorSidebar: View {
     @State
     private var selection: Int = 0
 
-    @StateObject
-    var prefs: AppPreferencesModel = .shared
+    var prefs: AppPreferencesModel
 
     var body: some View {
         VStack {
